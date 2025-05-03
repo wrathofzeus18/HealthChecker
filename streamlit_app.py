@@ -1,8 +1,8 @@
 import streamlit as st
-from openai import OpenAI
+import openai
 
 # Initialize OpenAI client using Streamlit's secrets
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # Title of the app
 st.title("Health Symptom Checker")
@@ -23,7 +23,7 @@ user_input = st.chat_input("Describe your symptoms here...")
 # Function to get a response from OpenAI with health advice
 def get_response(prompt):
     # Here, you may include a more specific prompt or fine-tune the assistant's instructions to provide general remedies
-    response = client.chat.completions.create(
+    response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": m["role"], "content": m["content"]}
